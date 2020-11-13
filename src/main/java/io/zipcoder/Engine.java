@@ -1,8 +1,6 @@
 package io.zipcoder;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Engine {
 
@@ -35,7 +33,7 @@ public class Engine {
                         petName = scanner.next();
                         scanner.nextLine();
                         Dog dog = new Dog(petName);
-                        petInfo.add(dog);
+                        this.petInfo.add(dog);
                         break;
 
                     case 2:
@@ -43,7 +41,7 @@ public class Engine {
                         petName = scanner.next();
                         scanner.nextLine();
                         Cat cat = new Cat(petName);
-                        petInfo.add(cat);
+                        this.petInfo.add(cat);
                         break;
 
                     case 3:
@@ -51,7 +49,7 @@ public class Engine {
                         petName = scanner.next();
                         scanner.nextLine();
                         Quokka quokka = new Quokka(petName);
-                        petInfo.add(quokka);
+                        this.petInfo.add(quokka);
                         break;
 
                     default:
@@ -63,16 +61,24 @@ public class Engine {
 
 
         }
-        for (Pet pet : petInfo) {
+        for (Pet pet : this.petInfo) {
             System.out.println(pet.getName() + " says " + pet.speak());
 
 
         }
 
+        // this calls comparable compareTo that overrides sort
+        Collections.sort(petInfo);
+        for (Pet obj : petInfo) {
+            System.out.println("Pet " + obj.getName() + " " + obj.speak());
+        }
 
+        // this calls comparator that sorts by object and then object field name
 
-
-
+        Collections.sort(petInfo, Pet.petTypeComparator);
+        for (Pet obj : petInfo) {
+            System.out.println("I am a " + obj.getClass().getSimpleName());
+        }
 
     }
 
